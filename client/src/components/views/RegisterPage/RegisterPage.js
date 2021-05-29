@@ -38,16 +38,17 @@ function RegisterPage(porps) {
         let body = {
             email: Email,
             password: Password,
-            name; Name
+            name: Name
         }
 
         dispatch(registerUser(body))
             .then(response => {
-                if (response.payload.loginSuccess) {
-                    props.history.push('/')
+                if (response.payloas.success) {
+                    props.history.push("/login")
                 } else {
-                    alert('Error')
+                    alert("Failed to sign up")
                 }
+
             })
 
 
