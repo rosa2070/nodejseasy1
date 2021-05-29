@@ -1,7 +1,7 @@
 import React from 'react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../_actions/user_action';
+import { registerUser } from '../../../_actions/user_action';
 
 
 function RegisterPage(porps) {
@@ -13,7 +13,7 @@ function RegisterPage(porps) {
     const [ConfirmPassword, setConfirmPassword] = useState("")
 
     const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value)
+        setName(event.currentTarget.value)
     }
 
     const onNameHandler = (event) => {
@@ -25,18 +25,23 @@ function RegisterPage(porps) {
     }
 
     const onConfirmPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value)
+        setConfirmPassword(event.currentTarget.value)
     }
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        let body = {
-            email: Email,
-            password: Password
+        if (Password !== ConfirmPassword) {
+            return alert('비밀번호와 비밀번호 확인은 같아야 합니다. ')
         }
 
-        dispatch(loginUser(body))
+        let body = {
+            email: Email,
+            password: Password,
+            name; Name
+        }
+
+        dispatch(registerUser(body))
             .then(response => {
                 if (response.payload.loginSuccess) {
                     props.history.push('/')
@@ -70,8 +75,8 @@ function RegisterPage(porps) {
                 <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
 
                 <br />
-                <button style>
-                    Login
+                <button type="submit">
+                    회원 가입
                 </button>
             </form>
         </div>
